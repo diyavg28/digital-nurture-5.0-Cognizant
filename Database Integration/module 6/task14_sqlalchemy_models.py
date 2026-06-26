@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Numeric, create_engine
+from sqlalchemy import Column, Integer, String, Date, Numeric, ForeignKey, Boolean, create_engine
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
@@ -22,6 +22,7 @@ class Student(Base):
     date_of_birth = Column(Date)
     department_id = Column(Integer, ForeignKey("departments.department_id"))
     enrollment_year = Column(Integer)
+    is_active = Column(Boolean, default=True)
 
     department = relationship("Department")
 
@@ -60,6 +61,17 @@ class Enrollment(Base):
     grade = Column(String(2))
 
     student = relationship("Student")
+    course = relationship("Course")
+
+class CourseSchedule(Base):
+    __tablename__ = "course_schedules"
+
+    schedule_id = Column(Integer, primary_key=True)
+    course_id = Column(Integer, ForeignKey("courses.course_id"))
+    day_of_week = Column(String(20))
+    start_time = Column(String(20))
+    end_time = Column(String(20))
+
     course = relationship("Course")
 
 
