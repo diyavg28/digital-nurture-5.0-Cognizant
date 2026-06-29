@@ -1,32 +1,31 @@
 import { courses } from "./data.js";
 
-// Step 30 - Destructuring
-courses.forEach(({ name, credits }) => {
-    console.log(name, credits);
+// Select the course grid
+const courseGrid = document.querySelector(".course-grid");
+
+// Render all course cards
+courses.forEach(course => {
+
+    const article = document.createElement("article");
+
+    article.className = "course-card";
+
+    article.innerHTML = `
+        <h3>${course.name}</h3>
+        <p>${course.code}</p>
+        <p>Credits: ${course.credits}</p>
+    `;
+
+    courseGrid.appendChild(article);
+
 });
 
-// Step 31 - map()
-const formattedCourses = courses.map(({ code, name, credits }) =>
-    `${code} - ${name} (${credits} credits)`
-);
-
-console.log(formattedCourses);
-
-// Step 32 - filter()
-const filteredCourses = courses.filter(course => course.credits >= 4);
-
-console.log(filteredCourses);
-
-// Step 33 - reduce()
+// Calculate total credits
 const totalCredits = courses.reduce(
-    (total, course) => total + course.credits,
+    (sum, course) => sum + course.credits,
     0
 );
 
-console.log(totalCredits);
-
-// Step 34 - Arrow Function
-const displayCourse = ({ name, credits }) =>
-    `${name} - ${credits} credits`;
-
-console.log(displayCourse(courses[0]));
+// Display total credits
+document.getElementById("total-credits").textContent =
+    `Total Credits: ${totalCredits}`;
