@@ -87,15 +87,23 @@ button:hover {
     margin-bottom: 30px;
 }
 
+.course-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap:20px;
+}
+
 /* Course Cards */
 .course-card,
-article {
-    background-color: white;
-    padding: 20px;
-    margin: 20px 0;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+article{
+    background-color:white;
+    padding:20px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+
+    min-height:200px;
+    align-self:stretch;
 }
 
 article h3 {
