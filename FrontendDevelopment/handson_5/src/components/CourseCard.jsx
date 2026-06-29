@@ -1,10 +1,10 @@
-function CourseCard({ name, code, credits, grade }) {
+function CourseCard({ name, code, credits, grade, onEnroll }) {
   return (
     <div
       style={{
         border: "1px solid gray",
-        padding: "10px",
-        margin: "10px",
+        padding: "15px",
+        margin: "15px",
         borderRadius: "8px"
       }}
     >
@@ -12,6 +12,10 @@ function CourseCard({ name, code, credits, grade }) {
       <p>Code: {code}</p>
       <p>Credits: {credits}</p>
       <p>Grade: {grade}</p>
+
+      <button onClick={onEnroll}>
+        Enroll
+      </button>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-function Header({ siteName }) {
+function Header({ siteName, enrolledCount }) {
   return (
     <header>
       <h1>{siteName}</h1>
@@ -9,7 +9,7 @@ function Header({ siteName }) {
         <a href="#">Profile</a>
       </nav>
 
-      <hr />
+      <h3>Enrolled Courses: {enrolledCount}</h3>
     </header>
   );
 }
