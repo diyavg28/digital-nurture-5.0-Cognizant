@@ -1,3 +1,4 @@
+import CourseDetailPage from "./CourseDetailPage";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
@@ -8,6 +9,7 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/courses" element={<CoursesPage />} />
+      <Route path="/courses/:courseId" element={<CourseDetailPage />} />
       <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
