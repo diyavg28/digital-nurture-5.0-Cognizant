@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { EnrollmentContext } from "../EnrollmentContext";
+import { useSelector } from "react-redux";
 function Header({ siteName}) {
-  const { enrolledCourses } = useContext(EnrollmentContext);
+  const enrolledCourses = useSelector(
+  (state) => state.enrollment.enrolledCourses
+);
   return (
     <header>
       <h1>{siteName}</h1>

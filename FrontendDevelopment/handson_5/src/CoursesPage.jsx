@@ -1,13 +1,14 @@
-import { useContext } from "react";
+
 import { useNavigate } from "react-router-dom";
-import { EnrollmentContext } from "./EnrollmentContext";
+import { useDispatch } from "react-redux";
+import { enroll } from "./redux/enrollmentSlice";
 import courses from "./courses";
 import CourseCard from "./components/CourseCard";
 import Header from "./components/Header";
 
 export default function CoursesPage() {
   const navigate = useNavigate();
-  const { enroll } = useContext(EnrollmentContext);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -32,7 +33,7 @@ export default function CoursesPage() {
           code={course.code}
           credits={course.credits}
           grade={course.grade}
-          onEnroll={() => enroll(course)}
+          onEnroll={() => dispatch(enroll(course))}
         />
       ))}
     </div>

@@ -3,14 +3,15 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { EnrollmentProvider } from "./EnrollmentContext";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <EnrollmentProvider>
+    <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </EnrollmentProvider>
+    </Provider>
   </React.StrictMode>
 );
