@@ -10,14 +10,22 @@
       placeholder="Search courses"
     />
 
-    <CourseCard
+    <div
       v-for="course in filteredCourses"
       :key="course.id"
-      :name="course.name"
-      :code="course.code"
-      :credits="course.credits"
-      :grade="course.grade"
-    />
+      style="margin-bottom: 20px;"
+    >
+      <CourseCard
+        :name="course.name"
+        :code="course.code"
+        :credits="course.credits"
+        :grade="course.grade"
+      />
+
+      <button @click="enrollCourse(course)">
+        Enroll
+      </button>
+    </div>
   </div>
 </template>
 
@@ -25,7 +33,12 @@
 import { ref, computed, onMounted } from 'vue'
 import Header from '../components/Header.vue'
 import CourseCard from '../components/CourseCard.vue'
+import {useEnrollmentStore} from '../stores/enrollment'
 
+const store = useEnrollmentStore()
+const enrollCourse = (course: any) => {
+  store.enroll(course)
+}
 const searchTerm = ref('')
 
 const courses = ref<any[]>([])
