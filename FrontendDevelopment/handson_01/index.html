@@ -10,9 +10,9 @@
  <header>
     <h1>Student Portal</h1>
 
-    <nav>
+    <nav aria-label="Main navigation">
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="#" aria-current="page">Home</a></li>
             <li><a href="#">Courses</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Grades</a></li>
@@ -31,22 +31,26 @@
     <button>Explore Courses</button>
 </section>
 
+<p id="course-count" role="status" aria-live="polite">
+    3 courses available
+</p>
+
     <section id="courses">
         <h2>Available Courses</h2>
 
-<article>
+<article tabindex="0">
     <h3>HTML5</h3>
     <p>Learn Semantic HTML.</p>
     <span>Credits: 3</span>
 </article>
 
-<article>
+<article tabindex="0">
     <h3>CSS3</h3>
     <p>Master Responsive Design.</p>
     <span>Credits: 4</span>
 </article>
 
-<article>
+<article tabindex="0">
     <h3>JavaScript</h3>
     <p>Create Interactive Websites.</p>
     <span>Credits: 5</span>
@@ -58,6 +62,24 @@
     <footer>
         <p>&copy; 2026 Student Portal. All Rights Reserved.</p>
 
-    </footer>    
+    </footer> 
+    
+    <script>
+const cards = document.querySelectorAll("article");
+
+cards.forEach(card => {
+    card.addEventListener("click", () => {
+        alert("Course selected: " + card.querySelector("h3").textContent);
+    });
+
+    card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            card.click();
+        }
+    });
+});
+</script>
+
+ 
 </body>
 </html>
