@@ -1,4 +1,24 @@
 /* CSS Reset */
+
+/* Accessibility Check
+   Before:
+   Text Color: #333333
+   Background Color: #f4f4f4
+
+   After:
+   No changes required.
+   Contrast passes WCAG AA (minimum 4.5:1).
+*/
+
+/* Cross-Browser Testing
+   Tested in Chrome and Microsoft Edge.
+   No visual differences found.
+*/
+/* Browser Support Check
+   Feature Tested: CSS Flexbox
+   Source: caniuse.com
+   Result: Supported in Chrome, Edge, Firefox, and Safari.
+*/
 * {
     margin: 0;
     padding: 0;
