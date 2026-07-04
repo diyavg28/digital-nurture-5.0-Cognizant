@@ -34,6 +34,7 @@ import { ref, computed, onMounted } from 'vue'
 import Header from '../components/Header.vue'
 import CourseCard from '../components/CourseCard.vue'
 import {useEnrollmentStore} from '../stores/enrollment'
+import { getAllCourses } from '../api/courseApi'
 
 const store = useEnrollmentStore()
 const enrollCourse = (course: any) => {
@@ -42,8 +43,17 @@ const enrollCourse = (course: any) => {
 const searchTerm = ref('')
 
 const courses = ref<any[]>([])
+const loadCourses = async () => {
+  try {
+    const data = await getAllCourses()
+    console.log("Courses from API:", data)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 onMounted(() => {
+  
   courses.value = [
     { id: 1, name: 'Mathematics', code: 'MA101', credits: 4, grade: 'A' },
     { id: 2, name: 'Physics', code: 'PH102', credits: 3, grade: 'B+' },
@@ -51,6 +61,7 @@ onMounted(() => {
     { id: 4, name: 'Programming', code: 'CS104', credits: 4, grade: 'O' },
     { id: 5, name: 'English', code: 'EN105', credits: 2, grade: 'A' }
   ]
+  loadCourses()
 })
 
 const filteredCourses = computed(() =>
