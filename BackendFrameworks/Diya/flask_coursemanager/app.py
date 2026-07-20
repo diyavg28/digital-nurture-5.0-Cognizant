@@ -1,11 +1,22 @@
 from flask import Flask, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from config import Config
 from courses.routes import courses_bp
+
+db = SQLAlchemy()
+migrate = Migrate()
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    # Initialize SQLAlchemy and Flask-Migrate
+    db.init_app(app)
+    migrate.init_app(app, db)
+
+    from courses import models
 
     app.register_blueprint(courses_bp)
 

@@ -1,0 +1,81 @@
+from app import db
+
+
+class Department(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    head_of_dept = db.Column(db.String(100))
+    budget = db.Column(db.Float)
+
+    courses = db.relationship("Course", back_populates="department")
+
+    def __repr__(self):
+        return f"<Department {self.name}>"
+
+
+class Course(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    code = db.Column(db.String(20), unique=True)
+    credits = db.Column(db.Integer)
+
+    department_id = db.Column(
+        db.Integer,
+        db.ForeignKey("department.id")
+    )
+
+    department = db.relationship(
+        "Department",
+        back_populates="courses"
+    )
+
+    enrollments = db.relationship(
+        "Enrollment",
+        back_populates="course"
+    )
+
+    def __repr__(self):
+        return f"<Course {self.name}>"
+
+
+class Student(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(100))
+    last_name = db.Column(db.String(100))
+    email = db.Column(db.String(100), unique=True)
+    enrollment_year = db.Column(db.Integer)
+
+    enrollments = db.relationship(
+        "Enrollment",
+        back_populates="student"
+    )
+
+    def __repr__(self):
+        return f"<Student {self.first_name}>"
+
+
+class Enrollment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    student_id = db.Column(
+        db.Integer,
+        db.ForeignKey("student.id")
+    )
+
+    course_id = db.Column(
+        db.Integer,
+        db.ForeignKey("course.id")
+    )
+
+    student = db.relationship(
+        "Student",
+        back_populates="enrollments"
+    )
+
+    course = db.relationship(
+        "Course",
+        back_populates="enrollments"
+    )
+
+    def __repr__(self):
+        return f"<Enrollment {self.id}>"
