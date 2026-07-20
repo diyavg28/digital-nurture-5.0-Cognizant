@@ -10,7 +10,15 @@ class Department(db.Model):
     courses = db.relationship("Course", back_populates="department")
 
     def __repr__(self):
-        return f"<Department {self.name}>"
+     return f"<Department {self.name}>"
+
+    def to_dict(self):
+     return {
+        "id": self.id,
+        "name": self.name,
+        "head_of_dept": self.head_of_dept,
+        "budget": self.budget
+    }
 
 
 class Course(db.Model):
@@ -35,7 +43,16 @@ class Course(db.Model):
     )
 
     def __repr__(self):
-        return f"<Course {self.name}>"
+     return f"<Course {self.name}>"
+
+    def to_dict(self):
+     return {
+        "id": self.id,
+        "name": self.name,
+        "code": self.code,
+        "credits": self.credits,
+        "department_id": self.department_id
+    }
 
 
 class Student(db.Model):
@@ -52,6 +69,15 @@ class Student(db.Model):
 
     def __repr__(self):
         return f"<Student {self.first_name}>"
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "enrollment_year": self.enrollment_year
+        }
 
 
 class Enrollment(db.Model):
@@ -78,4 +104,11 @@ class Enrollment(db.Model):
     )
 
     def __repr__(self):
-        return f"<Enrollment {self.id}>"
+     return f"<Enrollment {self.id}>"
+
+    def to_dict(self):
+     return {
+        "id": self.id,
+        "student_id": self.student_id,
+        "course_id": self.course_id
+    }
